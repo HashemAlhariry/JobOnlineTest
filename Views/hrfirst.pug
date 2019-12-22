@@ -1,0 +1,58 @@
+extends layout
+
+block content
+
+   script(src="http://code.jquery.com/jquery-3.1.0.min.js")
+   script.
+         
+         function clicktodisapprove(positionid,username)
+         {
+                
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "http://localhost:8081/router/disapproval?positionid="+positionid+"&username="+username, true);
+                xhttp.send();
+         }
+        
+         function clicktoapprove(positionid,applicantusername){
+           
+            //var url="http://localhost:8081/router/approval?positionid="+positionid+"&username="+applicantusername;
+            // window.location = "http://localhost:8081/router/approval?positionid=1&username=mariam";
+
+
+            window.location.href = "http://localhost:8081/router/approval?"
+
+        $.ajax(
+              {
+                type:'GET',
+                url: '/positionid/'+positionid+'/username/'+applicantusername+"/",
+                success:function(data)
+                {
+                  console.log("DONEEE");
+                }      
+              }
+
+
+        )       
+         }
+         
+
+
+   div.page-wrapper.bg-dark.p-t-100.p-b-50
+        div.wrapper.wrapper--w900
+            div.card.card-6
+                form(action="http://localhost:8081/router/examtypes" method="GET")
+                  button.btn.btn--radius-2.btn--blue-2(type='submit') Exam Type
+                div.card-heading
+                  h2.title #{username}
+                div.card-body
+                   each val, index in position 
+                        div.positionrow               
+                            div.name
+                              h2 #{position[index].position_name}
+                              h3 Applied-canditates
+                                 each value , j in appliedcandidates[index]
+                                   h4 #{appliedcandidates[index][j].username}
+                                    button.btn.btn--radius-2.btn--blue-2(type='submit' style='margin:10px') Download CV
+                                    button.btn.btn--radius-2.btn--blue-2(type='submit' style='margin:10px' onclick='clicktodisapprove("' +position[index].position_id+ '","'+appliedcandidates[index][j].username+'")') Disapprove
+                                    form(action="" method="GET")
+                                      button.btn.btn--radius-2.btn--blue-2(onclick='clicktoapprove("' +position[index].position_id+ '","'+appliedcandidates[index][j].username+'")' type='submit' ) Approve

@@ -1,0 +1,46 @@
+extends layout
+
+block content
+    script(src="http://code.jquery.com/jquery-3.1.0.min.js")
+    script.
+         function addquestion()
+         {
+                var examtype = document.getElementById("examtype").value;
+                var question = document.getElementById("newquestion").value;
+                var newright1 = document.getElementById("newright1").value;
+                var newright2 = document.getElementById("newright2").value;
+                var newwrong1 = document.getElementById("newwrong1").value;
+                var newwrong2 = document.getElementById("newwrong2").value;
+                var newwrong2 = document.getElementById("newwrong3").value;
+                var URL = "http://localhost:8081/router/addquestion?question="+question+"&newright1="+newright1+"&newright2="+newright2+"&newwrong1="+newwrong1+"&newwrong2="+newwrong2+"&newwrong3="+newwrong3+"&examtype="+examtype;
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET",URL , true);
+                xhttp.send();
+              
+
+         }
+         
+
+                                 
+    div.page-wrapper.bg-dark.p-t-100.p-b-50
+            div.wrapper.wrapper--w900
+                div.card.card-6
+                    div.card-heading
+                        h2.title #{username}
+                    div.card-body
+                        h2(style='margin:2px') Add New Question
+                        form(action="" id="addquestion" method="GET" onsubmit="addquestion()")
+                                            input.input--style-6(id='examtype' type='text' placeholder='Add Exam Type' style='margin:2px')
+                                            input.input--style-6(id='newquestion' type='text' placeholder='Add new Question' style='margin:2px')                             
+                                            input.input--style-6(id='newright1' type='text' placeholder='Add new right Answer' style='margin:2px')                               
+                                            input.input--style-6(id='newright2' type='text' placeholder='Add new right Answer' style='margin:2px')                                
+                                            input.input--style-6(id='newwrong1' type='text' placeholder='Add new wrong Question' style='margin:2px')                                        
+                                            input.input--style-6(id='newwrong2' type='text' placeholder='Add new wrong Question' style='margin:2px')
+                                            input.input--style-6(id='newwrong3' type='text' placeholder='Add new wrong Question' style='margin:2px')
+                                            button.btn.btn--radius-2.btn--blue-2(type='submit' style='margin:2px') Add Question
+                        for i in examtype1
+                            div.positionrow               
+                                div.name
+                                h2 #{i.ExamType}
+                                    button.btn.btn--radius-2.btn--blue-2(type='submit' style='margin-top:5px; margin:2px' ) Delete Exam Type
+                                    button.btn.btn--radius-2.btn--blue-2(type='submit' style='margin-top:5px; margin:2px' ) update Exam Type                                                                       

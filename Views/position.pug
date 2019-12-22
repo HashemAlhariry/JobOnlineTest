@@ -1,0 +1,29 @@
+extend layout
+
+block content
+    script(src="http://code.jquery.com/jquery-3.1.0.min.js")
+    script.
+         function clickbutton(positionid,e)
+         {
+                console.log("Button CLICKED");
+                console.log(positionid);
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "http://localhost:8081/router/apply?position="+positionid, true);
+                xhttp.send();
+
+         }
+
+    div.page-wrapper.bg-dark.p-t-100.p-b-50
+        div.wrapper.wrapper--w900
+            div.card.card-6
+                div.card-heading
+                  h2.title #{username}
+                div.card-body
+                    for i in position
+                        div.positionrow               
+                            div.name
+                                h2 #{i.position_name}
+                                p  #{i.description}
+                                button.btn.btn--radius-2.btn--blue-2(onclick="clickbutton("+i.position_id+","+event+")") Apply  
+
+
